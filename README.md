@@ -13,11 +13,11 @@ Things you may want to cover:
 
 - Database creation
   Product
-  column | type
-  ------:|-----
-  name | string
-  price | int
-  stock | int
+  Product| column | type
+  -------|:------:|-----
+  |:name | string
+  |:price | int
+  |:stock | int
 
 - Database initialization
 
