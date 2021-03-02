@@ -15,9 +15,9 @@ Things you may want to cover:
   Product
   Product| column | type
   -------|:------:|-----
-  |:name | string
-  |:price | int
-  |:stock | int
+  -------|:name | string
+  -------|:price | int
+  -------|:stock | int
 
 - Database initialization
 
