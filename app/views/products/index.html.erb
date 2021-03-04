@@ -1,0 +1,27 @@
+<h1>Product List</h1>
+<p><%= flash[:notice] %></p>
+<%= link_to 'Add Product', new_product_path %>
+
+<div class="product">
+  <div class="container">
+    <div class="header">
+      <div class="col">Name</div>
+      <div class="col">Price</div>
+      <div class="col">Stock</div>
+      <div class="col">Edit</div>
+      <div class="col">Delete</div>
+    </div>
+    <div class="body">
+      <% @products.each do |product|%>
+        <div class="row">
+          <div class="col name"><%= product.name %></div>
+          <div class="col price"><%= product.price %></div>
+          <div class="col stock"><%= product.stock %></div>
+          <div class="col edit"><%= link_to 'Edit', edit_product_path(product) %></div>
+          <div class="col delete"><%= link_to 'Delete', product_path(product), method:'Delete'  %></div>
+        </div>
+      <% end %>
+    </div>
+  
+  </div>
+</div>

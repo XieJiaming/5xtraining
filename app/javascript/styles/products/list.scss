@@ -1,0 +1,27 @@
+body[class="products index"] {
+  margin: 30px;
+
+  .product {
+    .container {
+      .header {
+        display: flex;
+        .col {
+          width: 50px;
+          margin: 20px 20px 20px 0;
+        }
+
+      }
+      .body {
+
+        .row {
+          display: flex;
+
+          .col {
+            width: 50px;
+            margin: 20px 20px 20px 0;
+          }
+        }
+      }
+    }
+  }
+}

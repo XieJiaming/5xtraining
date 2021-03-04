@@ -1,0 +1,35 @@
+<h2>Edit product</h2>
+
+<%= link_to 'Back to product list page', root_path  %>
+
+<div class="container">
+  <%= form_with model: @product do |form|%>
+    <div class="input">
+      <div class="label">
+        <%= form.label :name, "Name" %>
+      </div>
+      <div class="field">
+        <%= form.text_field :name %>
+      </div>
+    </div>
+    <div class="input">
+      <div class="label">
+        <%= form.label :price, "Price" %>
+      </div>
+      <div class="field">
+        <%= form.text_field :price %>
+      </div>
+    </div>
+    <div class="input">
+      <div class="label">
+        <%= form.label :stock, "Stock" %>
+      </div>
+      <div class="field">
+        <%= form.text_field :stock %>
+      </div>
+    </div>
+    <div class="submit">
+      <%= form.submit "Edit Product" %>
+    </div>
+  <% end %>
+</div>
