@@ -1,0 +1,8 @@
+en:
+  products:
+    create:
+      notice: "You create it!"
+    update:
+      notice: "You update it!"
+    destroy:
+      notice: "You delete it!"

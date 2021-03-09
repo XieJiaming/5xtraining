@@ -1,15 +1,15 @@
 <h1>Product List</h1>
 <p><%= flash[:notice] %></p>
 <%= link_to 'Add Product', new_product_path %>
-<%= t('zh-TW.activerecord.attributes.product.name') %>
+
 <div class="product">
   <div class="container">
     <div class="header">
-      <div class="col"><%= t('activerecord.attributes.product.name') %></div>
-      <div class="col"><%= t('activerecord.attributes.product.price') %></div>
-      <div class="col"><%= t('activerecord.attributes.product.stock') %></div>
-      <div class="col"><%= t('actions.edit') %></div>
-      <div class="col"><%= t('actions.delete')%></div>
+      <div class="col"><%= t('.attributes.product.name') %></div>
+      <div class="col"><%= t('.attributes.product.price') %></div>
+      <div class="col"><%= t('.attributes.product.stock') %></div>
+      <div class="col"><%= t('.actions.edit') %></div>
+      <div class="col"><%= t('.actions.delete')%></div>
     </div>
     <div class="body">
       <% @products.each do |product|%>
