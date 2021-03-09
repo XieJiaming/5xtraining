@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.save
-        flash[:notice] = "成功建立"
+        flash[:notice] = t('.notice')
         format.html {
           redirect_to root_path
         }
@@ -33,7 +33,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.update(product_params)
-        flash[:notice] = "修改成功"
+        flash[:notice] = t('.notice')
         format.html {
           redirect_to root_path
         }
@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       if @product.destroy
-        flash[:notice] = "成功刪除資料"
+        flash[:notice] = t('.notice')
         format.html {
           redirect_to root_path
         }

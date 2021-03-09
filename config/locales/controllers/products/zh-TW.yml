@@ -1,0 +1,8 @@
+zh-TW:
+  products:
+    create:
+      notice: "建立成功!!!"
+    update:
+      notice: "更新成功!!!"
+    destroy:
+      notice: "刪除成功!!!"

@@ -2,7 +2,7 @@
   <%= form_with model: product do |form|%>
     <div class="input">
       <div class="label">
-        <%= form.label :name, "Name" %>
+        <%= form.label :name, t('zh-TW.products.index.attributes.product.name') %>
       </div>
       <div class="field">
         <%= form.text_field :name %>
@@ -10,7 +10,7 @@
     </div>
     <div class="input">
       <div class="label">
-        <%= form.label :price, "Price" %>
+        <%= form.label :price, t('zh-TW.products.index.attributes.product.price') %>
       </div>
       <div class="field">
         <%= form.text_field :price %>
@@ -18,14 +18,14 @@
     </div>
     <div class="input">
       <div class="label">
-        <%= form.label :stock, "Stock" %>
+        <%= form.label :stock, t('zh-TW.products.index.attributes.product.stock') %>
       </div>
       <div class="field">
         <%= form.text_field :stock %>
       </div>
     </div>
     <div class="submit">
-      <%= form.submit "Edit Product" %>
+      <%= form.submit %>
     </div>
   <% end %>
 </div>

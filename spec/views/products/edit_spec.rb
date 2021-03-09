@@ -13,6 +13,6 @@ RSpec.describe 'products/edit.html.erb', type: :view do
   it 'has link' do 
     render
     expect(rendered).to include('Back to product list page')
-    expect(rendered).to include('Edit Product')
+    expect(rendered).to include('更新產品')
   end
 end

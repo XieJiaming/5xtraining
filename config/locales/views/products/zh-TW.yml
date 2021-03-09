@@ -1,0 +1,17 @@
+zh-TW:
+  products:
+    index:
+      attributes:
+        product:
+          name: "名稱"
+          price: "價格"
+          stock: "庫存"
+      actions:
+        edit: "編輯"
+        delete: "刪除"
+    new:
+      attributes:
+        product:
+          name: "名稱"
+          price: "價格"
+          stock: "庫存"

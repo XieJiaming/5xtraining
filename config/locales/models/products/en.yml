@@ -1,0 +1,15 @@
+en:
+  activerecord:
+    models:
+      product: "PRODUCT"
+    attributes:
+      product:
+        name: "NAME"
+        price: "PRICE"
+        stock: "STOCK"
+    errors:
+      models:
+        product:
+          attributes:
+            name:
+              blank: "CAN NOT BE BLANK"

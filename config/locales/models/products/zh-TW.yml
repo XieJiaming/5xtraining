@@ -1,0 +1,15 @@
+zh-TW:
+  activerecord:
+    models:
+      product: "產品"
+    attributes:
+      product:
+        name: "名稱"
+        price: "價格"
+        stock: "庫存"
+    errors:
+      models:
+        product:
+          attributes:
+            name:
+              blank: "不能為空白"
