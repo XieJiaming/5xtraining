@@ -14,3 +14,4 @@ ActiveStorage.start()
 
 
 import 'styles'
+import 'validates'
