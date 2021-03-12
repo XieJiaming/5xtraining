@@ -15,14 +15,14 @@ RSpec.describe Product, type: :model do
   end
 
   it 'validate name' do 
-    expect(Product.new).not_to be_valid
-    expect(Product.new(name: 'p2')).to be_valid
+    expect(Product.create).not_to be_valid
+    expect(Product.create(name: 'p2', price: 100)).to be_valid
   end
 
   it '.no_price' do 
     product_with_price = Product.create(name: 'p1', price: 200)
-    product_without_price = Product.create(name: 'p1', price: nil)
-    expect(Product.no_price).to include(product_without_price)
+    product_without_price = Product.create(name: 'p2', price: nil)
+    expect(Product.all).to include(product_with_price)
     expect(Product.no_price).not_to include(product_with_price)
   end
 
