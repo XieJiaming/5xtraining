@@ -1,3 +1,4 @@
+<p><%= flash[:schedule_notice] %></p>
 <div class="container">
   <%= form_with model: product do |form|%>
     <div class="input">
@@ -28,6 +29,24 @@
       </div>
       <div class="field">
         <%= form.text_field :stock %>
+      </div>
+    </div>
+    <div class="input">
+      <div class="label">
+        <%= form.label :scheduled_start, t('zh-TW.products.index.attributes.product.scheduled_start') %>
+      </div>
+      <div class="field">
+        <input type="datetime-local" name="product[scheduled_start]" class="datetimepicker_end" value=<%= product.scheduled_start.nil? ? '' : product.scheduled_start.strftime("%Y/%m/%d")%> >
+        <i class="fa fa-calendar"></i>
+      </div>
+    </div>
+    <div class="input">
+      <div class="label">
+        <%= form.label :scheduled_end, t('zh-TW.products.index.attributes.product.scheduled_end') %>
+      </div>
+      <div class="field">
+        <input type="datetime-local" name="product[scheduled_end]" class="datetimepicker_end" value=<%= product.scheduled_end.nil? ? '' : product.scheduled_end.strftime("%Y/%m/%d")%> >
+        <i class="fa fa-calendar"></i>
       </div>
     </div>
     <div class="submit">
