@@ -39,20 +39,20 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product.scheduled_start > @product.scheduled_end
+      if product_params[:scheduled_start] > product_params[:scheduled_end]
         format.html {
           flash[:schedule_notice] = t('.scheduled_error')
-          render :new
+          render :edit
         }
       else
-        if @product.save
+        if @product.update(product_params)
           flash[:notice] = t('.notice')
           format.html {
             redirect_to root_path
           }
         else
           format.html {
-            render :new
+            render :edit
           }
         end  
       end
