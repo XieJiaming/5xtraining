@@ -26,5 +26,6 @@ Things you may want to cover:
 - Services (job queues, cache servers, search engines, etc.)
 
 - Deployment instructions
-
+  - 推上 heroku: git push heroku 分支名稱:master
+  - heroku run rails db:migrate
 - ...

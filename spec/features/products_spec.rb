@@ -7,7 +7,7 @@ RSpec.feature "Products", type: :feature do
 
       loaded_content = all('.row > .name').map(&:text)
 
-      expect(Product.order(created_at: :desc).pluck(:name)).to eq(loaded_content)      
+      expect(Product.order(created_at: :desc).pluck(:name)).to eq(loaded_content)  
     end
   end
 end

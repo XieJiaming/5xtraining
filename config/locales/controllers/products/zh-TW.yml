@@ -2,7 +2,9 @@ zh-TW:
   products:
     create:
       notice: "建立成功!!!"
+      scheduled_error: "上架時間不能比下架時間晚"
     update:
       notice: "更新成功!!!"
+      scheduled_error: "上架時間不能比下架時間晚"
     destroy:
       notice: "刪除成功!!!"

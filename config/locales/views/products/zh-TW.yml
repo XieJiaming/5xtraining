@@ -6,9 +6,14 @@ zh-TW:
           name: "名稱"
           price: "價格"
           stock: "庫存"
+          scheduled_start: "上架時間"
+          scheduled_end: "下架時間"
       actions:
         edit: "編輯"
         delete: "刪除"
+        new: "新增商品"
+        ASC: "依產品上架時間由小至大"
+        DESC: "依產品上架時間由大至小"
     new:
       attributes:
         product:

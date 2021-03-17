@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   def index
-    @products = Product.all.order(created_at: :desc)
+    @products = Product.order_by_schedueldstart(params[:ordered]).order(created_at: :desc)
   end
 
   def new
@@ -11,15 +11,22 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     respond_to do |format|
-      if @product.save
-        flash[:notice] = t('.notice')
+      if @product.scheduled_start > @product.scheduled_end
         format.html {
-          redirect_to root_path
-        }
-      else
-        format.html {
+          flash[:schedule_notice] = t('.scheduled_error')
           render :new
         }
+      else
+        if @product.save
+          flash[:notice] = t('.notice')
+          format.html {
+            redirect_to root_path
+          }
+        else
+          format.html {
+            render :new
+          }
+        end  
       end
     end
   end
@@ -32,15 +39,22 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
 
     respond_to do |format|
-      if @product.update(product_params)
-        flash[:notice] = t('.notice')
+      if product_params[:scheduled_start] > product_params[:scheduled_end]
         format.html {
-          redirect_to root_path
-        }
-      else
-        format.html {
+          flash[:schedule_notice] = t('.scheduled_error')
           render :edit
         }
+      else
+        if @product.update(product_params)
+          flash[:notice] = t('.notice')
+          format.html {
+            redirect_to root_path
+          }
+        else
+          format.html {
+            render :edit
+          }
+        end  
       end
     end
   end
@@ -60,6 +74,6 @@ class ProductsController < ApplicationController
 
   private
   def product_params
-    product_params = params.require(:product).permit(:name, :price, :stock)
+    product_params = params.require(:product).permit(:name, :price, :stock, :scheduled_start, :scheduled_end)
   end
 end
