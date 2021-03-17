@@ -31,4 +31,21 @@ RSpec.describe Product, type: :model do
     expect(product.noStock).to be(true)
     expect(product.noStock).not_to be(false)
   end
+
+  it 'validate scheduled_start' do 
+    expect(Product.create(name: 'p2', price: 100, scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).not_to be_valid
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).to be_valid
+  end
+
+  it 'validate scheduled_end' do 
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800")).not_to be_valid
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).to be_valid
+  end
+
+  it 'validate scheduled_start must be less than scheduled_end' do 
+    product1 = Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    product2 = Product.create(name: 'p2', price: 100, scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    expect(product1.scheduled_start).to be < product1.scheduled_end 
+    expect(product2.scheduled_end).to be < product2.scheduled_start
+  end
 end
