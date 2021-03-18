@@ -8,6 +8,8 @@ zh-TW:
           stock: "庫存"
           scheduled_start: "上架時間"
           scheduled_end: "下架時間"
+          stock_state: "存貨狀況"
+          stock_resolve: "叫貨狀態"
       actions:
         edit: "編輯"
         delete: "刪除"

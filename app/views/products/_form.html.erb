@@ -36,7 +36,8 @@
         <%= form.label :scheduled_start, t('zh-TW.products.index.attributes.product.scheduled_start') %>
       </div>
       <div class="field">
-        <input type="datetime-local" name="product[scheduled_start]" class="datetimepicker_end" value=<%= product.scheduled_start.nil? ? '' : product.scheduled_start.strftime("%Y/%m/%d")%> >
+        <%= form.datetime_local_field :scheduled_start, :value => product.scheduled_start.strftime("%Y-%m-%dT%H:%M:%S") %>
+
         <i class="fa fa-calendar"></i>
       </div>
     </div>
@@ -45,8 +46,20 @@
         <%= form.label :scheduled_end, t('zh-TW.products.index.attributes.product.scheduled_end') %>
       </div>
       <div class="field">
-        <input type="datetime-local" name="product[scheduled_end]" class="datetimepicker_end" value=<%= product.scheduled_end.nil? ? '' : product.scheduled_end.strftime("%Y/%m/%d")%> >
+        <input type="datetime-local" id="product_scheduled_end" name="product[scheduled_end]" class="datetimepicker_end" value=<%= product.scheduled_end.nil? ? '' : product.scheduled_end.strftime("%Y-%m-%dT%H:%M:%S")%> >
         <i class="fa fa-calendar"></i>
+      </div>
+    </div>
+    <div class="input">
+      <div class="label">
+        <%= form.label :product_resolve, t('zh-TW.products.index.attributes.product.product_resolve') %>
+      </div>
+      <div class="field">
+        <select name="prodcut_resolve", id="product_resolve">
+          <option value="0">不需叫貨</option>
+          <option value="1">已叫貨</option>
+          <option value="2">需叫貨</option>
+        </select>  
       </div>
     </div>
     <div class="submit">

@@ -11,6 +11,8 @@
       <div class="col"><%= t('.attributes.product.stock') %></div>
       <div class="col"><%= t('.attributes.product.scheduled_start') %></div>
       <div class="col"><%= t('.attributes.product.scheduled_end') %></div>
+      <div class="col"><%= t('.attributes.product.stock_state') %></div>
+      <div class="col"><%= t('.attributes.product.stock_resolve') %></div>
       <div class="col"><%= t('.actions.edit') %></div>
       <div class="col"><%= t('.actions.delete')%></div>
     </div>
@@ -22,6 +24,8 @@
           <div class="col stock"><%= product.stock %></div>
           <div class="col scheduled"><%= product.scheduled_start ? product.scheduled_start.strftime('%Y/%m/%d') : "" %></div>
           <div class="col stock"><%= product.scheduled_end ? product.scheduled_end.strftime('%Y/%m/%d') : "" %></div>
+          <div class="col"><%= product.stock_state %></div>
+          <div class="col"><%= product.product_resolve %></div>
           <div class="col edit"><%= link_to 'Edit', edit_product_path(product) %></div>
           <div class="col delete"><%= link_to 'Delete', product_path(product), method:'Delete'  %></div>
         </div>
