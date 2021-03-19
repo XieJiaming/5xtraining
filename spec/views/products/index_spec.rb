@@ -11,5 +11,6 @@ RSpec.describe "products/index.html.erb", type: :view do
     expect(rendered).to include("100")
     expect(rendered).to include("2021/03/09")
     expect(rendered).to include("2021/03/27")
+    expect(rendered).to include("不需叫貨")
   end
 end
