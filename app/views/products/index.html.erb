@@ -3,6 +3,15 @@
 <%= link_to t('.actions.new'), new_product_path %>
 <%= link_to t('.actions.ASC'), products_path(ordered: 'ASC') %>
 <%= link_to t('.actions.DESC'), products_path(ordered: 'DESC') %>
+
+<div class="search">
+  <%= search_form_for @q do |form| %>
+    <%= form.search_field :keyword_eq, placeholder: '輸入名稱或叫貨狀態'%>
+
+    <%= form.submit 'search'%>
+  <% end %>
+</div>
+
 <div class="product">
   <div class="container">
     <div class="header">
