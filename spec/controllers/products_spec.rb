@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'spec_helper'
 
 RSpec.describe ProductsController, type: :controller do
-  before(:all) do
+  before(:each) do
     @product1 = Product.create(name: 'p1', price: 100, stock: 200, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800")
     @product2 = Product.create(name: 'p2', price: 10, stock: 20, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800")
     @product3 = Product.create(name: 'p3', price: 30, stock: 30, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800")
@@ -21,7 +21,7 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe '#create' do
-    before(:all) do 
+    before(:each) do 
       @product_params = {name: 'p3', price: 30, stock: 30, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800"}
     end
 
@@ -52,7 +52,7 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe '#update' do 
-    before(:all) do 
+    before(:each) do 
       @product_params = {name: 'p4', price: 40, stock: 400, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800"}
     end
 
