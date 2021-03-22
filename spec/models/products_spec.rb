@@ -48,4 +48,16 @@ RSpec.describe Product, type: :model do
     expect(product1.scheduled_start).to be < product1.scheduled_end 
     expect(product2.scheduled_end).to be < product2.scheduled_start
   end
+
+  it 'validate product_resolve' do 
+    product1 = Product.create(name: 'p2', price: 100, product_resolve: '不需叫貨', scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    product2 = Product.create(name: 'p3', price: 100, product_resolve: '已叫貨', scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    product3 = Product.create(name: 'p4', price: 100, product_resolve: '需叫貨', scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    product4 = Product.create(name: 'p5', price: 100, scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+
+    expect(product1).to be_valid
+    expect(product2).to be_valid
+    expect(product3).to be_valid
+    expect(product4).to be_valid
+  end
 end

@@ -7,6 +7,10 @@ zh-TW:
         name: "名稱"
         price: "價格"
         stock: "庫存"
+    stock_state:
+      empty: "無存貨"
+      less: "少量存貨"
+      full: "存貨充足"
     errors:
       models:
         product:
