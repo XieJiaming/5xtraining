@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
     @q = Product.search_keyword(params)
-    @products = @q.result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc)
+    @products = @q.result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
   end
 
   def new
