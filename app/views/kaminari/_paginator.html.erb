@@ -1,0 +1,19 @@
+<%= paginator.render do -%>
+  <div class="section-block pagination-3 no-padding-top"><!-- Added Here -->
+    <div class="row"><!-- Added Here -->
+      <div class="column width-12"><!-- Added Here -->
+        <ul class="pagination justify-content-center">
+          <%= first_page_tag unless current_page.first? %>
+          <%= prev_page_tag unless current_page.first? %>
+          <% each_page do |page| -%>
+            <% if page.left_outer? || page.right_outer? || page.inside_window? -%>
+              <%= page_tag page %>
+            <% end -%>
+          <% end -%>
+          <%= next_page_tag unless current_page.last? %>
+          <%= last_page_tag unless current_page.last? %>
+        </ul>
+      </div><!-- Added Here -->
+    </div><!-- Added Here -->
+  </div><!-- Added Here -->
+<% end -%>
