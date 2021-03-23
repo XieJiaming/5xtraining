@@ -8,7 +8,7 @@ RSpec.feature "Products", type: :feature do
       loaded_content = all('.row > .name').map(&:text)
       params = {}
 
-      expect(Product.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).pluck(:name)).to eq(loaded_content)  
+      expect(Product.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)  
     end
 
     it 'ordered :scheduled_start by descent' do 
@@ -18,7 +18,7 @@ RSpec.feature "Products", type: :feature do
 
       params = {"ordered"=>"DESC"}
 
-      expect(Product.search_keyword(params).result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).pluck(:name)).to eq(loaded_content)  
+      expect(Product.search_keyword(params).result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)  
     end
 
     it 'ordered :scheduled_start by ascent' do 
@@ -28,7 +28,7 @@ RSpec.feature "Products", type: :feature do
 
       params = {"ordered"=>"ASC"}
 
-      expect(Product.search_keyword(params).result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).pluck(:name)).to eq(loaded_content)  
+      expect(Product.search_keyword(params).result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)  
     end
   end
 
@@ -40,8 +40,8 @@ RSpec.feature "Products", type: :feature do
       loaded_content = all('.row > .name').map(&:text)
       counts = all('.row > .name').length
 
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name)).to eq(loaded_content)
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name).length).to eq(counts)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name).length).to eq(counts)
     end
     
     it 'search by name: does not match' do 
@@ -51,8 +51,8 @@ RSpec.feature "Products", type: :feature do
       loaded_content = all('.row > .name').map(&:text)
       counts = all('.row > .name').length
 
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name)).to eq(loaded_content)
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name).length).to eq(counts)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name).length).to eq(counts)
 
     end 
 
@@ -63,8 +63,8 @@ RSpec.feature "Products", type: :feature do
       loaded_content = all('.row > .name').map(&:text)
       counts = all('.row > .name').length
 
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name)).to eq(loaded_content)
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name).length).to eq(counts)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name).length).to eq(counts)
 
     end
 
@@ -75,8 +75,8 @@ RSpec.feature "Products", type: :feature do
       loaded_content = all('.row > .name').map(&:text)
       counts = all('.row > .name').length
 
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name)).to eq(loaded_content)
-      expect(Product.search_keyword(params).result.order(created_at: :desc).pluck(:name).length).to eq(counts)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name)).to eq(loaded_content)
+      expect(Product.search_keyword(params).result.order(created_at: :desc).page(params[:page]).pluck(:name).length).to eq(counts)
 
     end
   end
