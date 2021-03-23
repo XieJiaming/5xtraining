@@ -1,47 +1,49 @@
 <h1 class='title'>Product List</h1>
 <p class='flash'><%= flash[:notice] %></p>
-<%= link_to t('.actions.new'), new_product_path %>
-<%= link_to t('.actions.ASC'), products_path(ordered: 'ASC') %>
-<%= link_to t('.actions.DESC'), products_path(ordered: 'DESC') %>
+<div class="buttons my-4">
+  <%= link_to t('.actions.new'), new_product_path, class: "btn btn-primary mr-2" %>
+  <%= link_to t('.actions.ASC'), products_path(ordered: 'ASC'), class: "btn btn-primary mr-2"%>
+  <%= link_to t('.actions.DESC'), products_path(ordered: 'DESC'), class: "btn btn-primary mr-2" %>  
+</div>
 
 <div class="search">
-  <%= search_form_for @q do |form| %>
-    <%= form.search_field :keyword_eq, placeholder: '輸入名稱或叫貨狀態'%>
+  <%= search_form_for(@q, html: {class: "input-group mb-3"}) do |form| %>
+    <%= form.search_field :keyword_eq, placeholder: '輸入名稱或叫貨狀態', class: "form-control"%>
 
-    <%= form.submit 'search'%>
+    <%= form.submit 'search', class: "btn btn-outline-secondary"%>
   <% end %>
 </div>
 
 <div class="product">
-  <div class="container">
-    <div class="header">
-      <div class="row">
-        <div class="col"><%= t('.attributes.product.name') %></div>
-        <div class="col"><%= t('.attributes.product.price') %></div>
-        <div class="col"><%= t('.attributes.product.stock') %></div>
-        <div class="col"><%= t('.attributes.product.scheduled_start') %></div>
-        <div class="col"><%= t('.attributes.product.scheduled_end') %></div>
-        <div class="col"><%= t('.attributes.product.stock_state') %></div>
-        <div class="col"><%= t('.attributes.product.stock_resolve') %></div>
-        <div class="col"><%= t('.actions.edit') %></div>
-        <div class="col"><%= t('.actions.delete')%></div>  
-      </div>
-    </div>
-    <div class="body">
+  <table class="container table table-hover">
+    <thead class="header">
+      <tr class="row">
+        <th class="col"><%= t('.attributes.product.name') %></th>
+        <th class="col"><%= t('.attributes.product.price') %></th>
+        <th class="col"><%= t('.attributes.product.stock') %></th>
+        <th class="col"><%= t('.attributes.product.scheduled_start') %></th>
+        <th class="col"><%= t('.attributes.product.scheduled_end') %></th>
+        <th class="col"><%= t('.attributes.product.stock_state') %></th>
+        <th class="col"><%= t('.attributes.product.stock_resolve') %></th>
+        <th class="col"><%= t('.actions.edit') %></th>
+        <th class="col"><%= t('.actions.delete')%></th>  
+      </tr>
+    </thead>
+    <tbody class="body">
       <% @products.each do |product|%>
-        <div class="row">
-          <div class="col name"><%= product.name %></div>
-          <div class="col price"><%= product.price %></div>
-          <div class="col stock"><%= product.stock %></div>
-          <div class="col scheduled"><%= product.scheduled_start ? product.scheduled_start.strftime('%Y/%m/%d') : "" %></div>
-          <div class="col stock"><%= product.scheduled_end ? product.scheduled_end.strftime('%Y/%m/%d') : "" %></div>
-          <div class="col"><%= product.stock_state %></div>
-          <div class="col"><%= product.product_resolve %></div>
-          <div class="col edit"><%= link_to 'Edit', edit_product_path(product) %></div>
-          <div class="col delete"><%= link_to 'Delete', product_path(product), method:'Delete'  %></div>
-        </div>
+        <tr class="row">
+          <th class="col name"><%= product.name %></th>
+          <th class="col price"><%= product.price %></th>
+          <th class="col stock"><%= product.stock %></th>
+          <th class="col scheduled"><%= product.scheduled_start ? product.scheduled_start.strftime('%Y/%m/%d') : "" %></th>
+          <th class="col stock"><%= product.scheduled_end ? product.scheduled_end.strftime('%Y/%m/%d') : "" %></th>
+          <th class="col"><%= product.stock_state %></th>
+          <th class="col"><%= product.product_resolve %></th>
+          <th class="col edit"><%= link_to 'Edit', edit_product_path(product) %></th>
+          <th class="col delete"><%= link_to 'Delete', product_path(product), method:'Delete'  %></th>
+        </tr>
       <% end %>
-    </div>
-    <%= paginate @products %>
-  </div>
+    </tbody>
+  </table>
+  <%= paginate @products %>
 </div>
