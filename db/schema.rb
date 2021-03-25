@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 2021_03_25_093034) do
     t.integer "product_resolve", default: 0
   end
 
+  create_table "user", force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email", null: false

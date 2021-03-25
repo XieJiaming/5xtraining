@@ -1,0 +1,23 @@
+<p>Sign In Page</p>
+<%= form_with model: @user, url: sign_in_path do |form| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <% @user.errors.full_messages.each do |message| %>
+        <div>
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :email, class: 'form-control', placeholder: 'name@example.com' %>
+    <%= form.label :email , 'Email address'%>
+  </div>
+  <div class="form-floating">
+    <%= form.password_field :password, class: 'form-control', placeholder: 'Password'%>
+    <%= form.label :password , 'Password'%>
+  </div>
+  <div class="form-floating">
+    <%= form.submit(class: "btn btn-primary mb-3", value: 'Sign In')%>
+  </div>
+<% end %>
