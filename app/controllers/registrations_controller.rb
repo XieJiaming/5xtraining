@@ -5,10 +5,12 @@ class RegistrationsController < ApplicationController
 
   def create
     @user = User.new(registration_params)
+
     respond_to do |format|
       if @user.save
         session[:userkey] = @user.id
         format.html {
+          flash[:alert] = 'Successfully Sign Up'
           redirect_to root_path
         }
       else

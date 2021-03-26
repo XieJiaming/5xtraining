@@ -4,11 +4,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    @user = User.find_by(session_params)
+    @user = User.log_in(session_params)
+
     respond_to do |format|
       if @user.present?
         session[:userkey] = @user.id
         format.html {
+          flash[:alert] = "Successfully Log In"
           redirect_to root_path
         }
       else
@@ -25,7 +27,7 @@ class SessionsController < ApplicationController
     session[:userkey] = nil
     respond_to do |format|
       format.html {
-        flash[:log_out] = 'Log Out'
+        flash[:log_out] = 'Successfully Log Out'
         redirect_to root_path
       }
     end
