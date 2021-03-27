@@ -1,7 +1,13 @@
 class ProductsController < ApplicationController
   def index
-    @q = Product.search_keyword(params)
-    @products = @q.result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
+    if user_sign_in?
+      @q = Product.search_keyword(params)
+      @products = @q.result
+      @products = @products.owned_by(current_user).order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
+    else
+      @q = Product.search_keyword(params)
+      @products = nil
+    end
   end
 
   def new

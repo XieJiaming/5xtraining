@@ -30,20 +30,22 @@
       </tr>
     </thead>
     <tbody class="body">
-      <% @products.each do |product|%>
-        <tr class="row">
-          <th class="col name"><%= product.name %></th>
-          <th class="col price"><%= product.price %></th>
-          <th class="col stock"><%= product.stock %></th>
-          <th class="col scheduled"><%= product.scheduled_start ? product.scheduled_start.strftime('%Y/%m/%d') : "" %></th>
-          <th class="col stock"><%= product.scheduled_end ? product.scheduled_end.strftime('%Y/%m/%d') : "" %></th>
-          <th class="col"><%= product.stock_state %></th>
-          <th class="col"><%= product.product_resolve %></th>
-          <th class="col edit"><%= link_to 'Edit', edit_product_path(product) %></th>
-          <th class="col delete"><%= link_to 'Delete', product_path(product), method:'Delete'  %></th>
-        </tr>
+      <% if @products %>
+        <% @products.each do |product|%>
+          <tr class="row">
+            <th class="col name"><%= product.name %></th>
+            <th class="col price"><%= product.price %></th>
+            <th class="col stock"><%= product.stock %></th>
+            <th class="col scheduled"><%= product.scheduled_start ? product.scheduled_start.strftime('%Y/%m/%d') : "" %></th>
+            <th class="col stock"><%= product.scheduled_end ? product.scheduled_end.strftime('%Y/%m/%d') : "" %></th>
+            <th class="col"><%= product.stock_state %></th>
+            <th class="col"><%= product.product_resolve %></th>
+            <th class="col edit"><%= link_to 'Edit', edit_product_path(product) %></th>
+            <th class="col delete"><%= link_to 'Delete', product_path(product), method:'Delete'  %></th>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
-  <%= paginate @products %>
+  <%= paginate @products if @products %>
 </div>
