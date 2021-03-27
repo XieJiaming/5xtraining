@@ -9,8 +9,10 @@ class ProductsController < ApplicationController
   end
 
   def create
+    # @product = current_user.products.new(product_params)
     @product = Product.new(product_params)
-
+    @product.user = current_user
+    byebug
     respond_to do |format|
       if @product.scheduled_start > @product.scheduled_end
         format.html {
@@ -19,12 +21,13 @@ class ProductsController < ApplicationController
         }
       else
         if @product.save
-          flash[:notice] = t('.notice')
           format.html {
+            flash[:notice] = t('.notice')
             redirect_to root_path
           }
         else
           format.html {
+            flash[:notice] = 'something wrong'
             render :new
           }
         end  

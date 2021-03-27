@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   validates :email, :password, presence: true
 
+  has_many :products
+
   before_create :encrypt_password
 
   def self.log_in(params)
