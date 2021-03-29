@@ -1,9 +1,16 @@
 class ProductsController < ApplicationController
   def index
     if user_sign_in?
-      @q = Product.search_keyword(params)
-      @products = @q.result
-      @products = @products.owned_by(current_user).order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
+      if current_user.admin?
+        @q = Product.search_keyword(params)
+        @products = @q.result
+        @products = @products.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
+        authorize @products
+      else
+        @q = Product.search_keyword(params)
+        @products = @q.result
+        @products = @products.owned_by(current_user).order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
+      end
     else
       @q = Product.search_keyword(params)
       @products = nil
@@ -15,10 +22,9 @@ class ProductsController < ApplicationController
   end
 
   def create
-    # @product = current_user.products.new(product_params)
-    @product = Product.new(product_params)
-    @product.user = current_user
-    byebug
+    @product = current_user.products.new(product_params)
+    # @product = Product.new(product_params)
+    # @product.user = current_user
     respond_to do |format|
       if @product.scheduled_start > @product.scheduled_end
         format.html {

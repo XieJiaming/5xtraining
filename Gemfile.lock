@@ -78,6 +78,12 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
+    database_cleaner (2.0.1)
+      database_cleaner-active_record (~> 2.0.0)
+    database_cleaner-active_record (2.0.0)
+      activerecord (>= 5.a)
+      database_cleaner-core (~> 2.0.0)
+    database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
     erubi (1.10.0)
     fabrication (2.21.1)
@@ -130,6 +136,8 @@ GEM
     public_suffix (4.0.6)
     puma (5.2.2)
       nio4r (~> 2.0)
+    pundit (2.1.0)
+      activesupport (>= 3.0.0)
     racc (1.5.2)
     rack (2.2.3)
     rack-mini-profiler (2.3.1)
@@ -257,6 +265,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
+  database_cleaner (~> 2.0, >= 2.0.1)
   fabrication
   faker
   jbuilder (~> 2.7)
@@ -264,6 +273,7 @@ DEPENDENCIES
   listen (~> 3.3)
   pg (~> 1.2)
   puma (~> 5.0)
+  pundit
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.0)
   rails-controller-testing

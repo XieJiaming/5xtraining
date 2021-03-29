@@ -27,6 +27,7 @@ gem 'ransack'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'kaminari'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -54,6 +55,7 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
   gem 'fabrication'
+  gem 'database_cleaner', '~> 2.0', '>= 2.0.1'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

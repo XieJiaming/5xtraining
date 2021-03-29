@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   validates :email, :password, presence: true
 
-  has_many :products
+  has_many :products, :dependent => :destroy
 
   before_create :encrypt_password
 

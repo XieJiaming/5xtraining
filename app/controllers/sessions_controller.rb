@@ -33,9 +33,55 @@ class SessionsController < ApplicationController
     end
   end
 
+  def show
+    @user = current_user
+  end
+
+  def update
+    @user = User.find(current_user[:id])
+
+    respond_to do |format|
+      if @user.update(session_update_params)
+        format.html {
+          redirect_to root_path
+        }
+      else
+        format.html {
+          render :show
+        }
+      end
+    end
+  end
+
+  def delete_confirm
+    
+  end
+
+  def delete_account
+    @user = User.find(current_user[:id])
+
+    respond_to do |format|
+      if @user.destroy
+        flash[:notice] = 'Successfully Delete Account'
+        format.html {
+          redirect_to root_path
+        }
+      else 
+        flash[:notice] = 'Something wrong'
+        form.html {
+          render :delete_confirm
+        }
+      end
+    end
+  end
+
   private
 
   def session_params
     params.require(:user).permit(:email, :password)
+  end
+
+  def session_update_params
+    params.require(:user).permit(:password)
   end
 end 
