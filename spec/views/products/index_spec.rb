@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "products/index.html.erb", type: :view do 
   before(:each) do 
-
-    @product = Product.create(name: 'p1', price: 100, stock: 100, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800")    
+    @user1 = User.create(email: 'test@gmail.com', password: 'qwerty')
+    @product = Product.create(name: 'p1', price: 100, stock: 100, scheduled_start: "2021-03-09 15:50:00.000000000 +0800", scheduled_end: "2021-03-27 15:50:00.000000000 +0800", user_id: @user1.id)    
     params = {"q"=>{"keyword_eq"=>""}, "commit"=>"search"}
     @q = Product.search_keyword(params)
     @products = @q.result.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])

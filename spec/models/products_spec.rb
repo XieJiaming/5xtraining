@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   it 'is accessible' do 
-    product = Product.create(name: 'p1', price:100, stock: 0, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    user = User.create(email: 'test@gmail.com', password: 'qwerty')
+    product = Product.create(name: 'p1', price:100, stock: 0, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
     expect(product).to eq(Product.last)
   end
 
@@ -15,13 +16,15 @@ RSpec.describe Product, type: :model do
   end
 
   it 'validate name' do 
+    user = User.create(email: 'test@gmail.com', password: 'qwerty')
     expect(Product.create).not_to be_valid
-    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).to be_valid
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)).to be_valid
   end
 
-  it '.no_price' do 
-    product_with_price = Product.create(name: 'p1', price: 200, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
-    product_without_price = Product.create(name: 'p2', price: nil, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+  it '.no_price' do
+    user = User.create(email: 'test@gmail.com', password: 'qwerty') 
+    product_with_price = Product.create(name: 'p1', price: 200, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
+    product_without_price = Product.create(name: 'p2', price: nil, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
     expect(Product.all).to include(product_with_price)
     expect(Product.no_price).not_to include(product_with_price)
   end
@@ -33,13 +36,15 @@ RSpec.describe Product, type: :model do
   end
 
   it 'validate scheduled_start' do 
-    expect(Product.create(name: 'p2', price: 100, scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).not_to be_valid
-    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).to be_valid
+    user = User.create(email: 'test@gmail.com', password: 'qwerty')
+    expect(Product.create(name: 'p2', price: 100, scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)).not_to be_valid
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)).to be_valid
   end
 
   it 'validate scheduled_end' do 
-    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800")).not_to be_valid
-    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")).to be_valid
+    user = User.create(email: 'test@gmail.com', password: 'qwerty')
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", user_id: user.id)).not_to be_valid
+    expect(Product.create(name: 'p2', price: 100, scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)).to be_valid
   end
 
   it 'validate scheduled_start must be less than scheduled_end' do 
@@ -50,10 +55,11 @@ RSpec.describe Product, type: :model do
   end
 
   it 'validate product_resolve' do 
-    product1 = Product.create(name: 'p2', price: 100, product_resolve: '不需叫貨', scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
-    product2 = Product.create(name: 'p3', price: 100, product_resolve: '已叫貨', scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
-    product3 = Product.create(name: 'p4', price: 100, product_resolve: '需叫貨', scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
-    product4 = Product.create(name: 'p5', price: 100, scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800")
+    user = User.create(email: 'test@gmail.com', password: 'qwerty')
+    product1 = Product.create(name: 'p2', price: 100, product_resolve: '不需叫貨', scheduled_start: "2021-03-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
+    product2 = Product.create(name: 'p3', price: 100, product_resolve: '已叫貨', scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
+    product3 = Product.create(name: 'p4', price: 100, product_resolve: '需叫貨', scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
+    product4 = Product.create(name: 'p5', price: 100, scheduled_start: "2021-04-26 17:31:00.000000000 +0800", scheduled_end: "2021-04-08 17:31:00.000000000 +0800", user_id: user.id)
 
     expect(product1).to be_valid
     expect(product2).to be_valid

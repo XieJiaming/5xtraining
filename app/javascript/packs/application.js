@@ -15,3 +15,4 @@ ActiveStorage.start()
 
 import 'styles'
 import 'validates'
+import '../navbar'
