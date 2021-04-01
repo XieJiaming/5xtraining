@@ -1,16 +1,19 @@
 class ProductsController < ApplicationController
+  before_action :find_product, only: [:edit, :update, :destroy]
+  # after_action :verify_authorized, except: [:index, :new]
+
   def index
     if user_sign_in?
       if current_user.admin?
         @q = Product.search_keyword(params)
         @products = @q.result
         @products = @products.order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
-        authorize @products
       else
         @q = Product.search_keyword(params)
         @products = @q.result
         @products = @products.owned_by(current_user).order_by_schedueldstart(params[:ordered]).order(created_at: :desc).page(params[:page])
       end
+      authorize @products
     else
       @q = Product.search_keyword(params)
       @products = nil
@@ -18,13 +21,21 @@ class ProductsController < ApplicationController
   end
 
   def new
-    @product = Product.new
+    if current_user
+      @product = current_user.products.new
+      authorize @product
+    else
+      respond_to do |format|
+        format.html {
+          flash[:notice] = 'You have to log in to access to the page'
+          redirect_to root_path
+        }
+      end
+    end
   end
 
   def create
     @product = current_user.products.new(product_params)
-    # @product = Product.new(product_params)
-    # @product.user = current_user
     respond_to do |format|
       if @product.scheduled_start > @product.scheduled_end
         format.html {
@@ -48,11 +59,10 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = Product.find(params[:id])
+    authorize @product
   end
 
   def update
-    @product = Product.find(params[:id])
 
     respond_to do |format|
       if product_params[:scheduled_start] > product_params[:scheduled_end]
@@ -76,8 +86,7 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    @product = Product.find(params[:id])
-
+    authorize @product
     respond_to do |format|
       if @product.destroy
         flash[:notice] = t('.notice')
@@ -91,5 +100,9 @@ class ProductsController < ApplicationController
   private
   def product_params
     product_params = params.require(:product).permit(:name, :price, :stock, :scheduled_start, :scheduled_end, :product_resolve)
+  end
+
+  def find_product
+    @product = Product.find(params[:id])
   end
 end

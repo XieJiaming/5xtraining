@@ -1,5 +1,8 @@
 <h1 class='title'>Product List</h1>
-<p class='flash'><%= flash[:notice] %></p>
+<% if flash[:notice] or flash[:alert] %>
+  <p class='alert alert-primary flash'><%= flash[:notice] %>  <%= flash[:alert] %>
+  </p> 
+<% end %>
 <div class="buttons my-4">
   <%= link_to t('.actions.new'), new_product_path, class: "btn btn-primary mr-2" %>
   <%= link_to t('.actions.ASC'), products_path(ordered: 'ASC'), class: "btn btn-primary mr-2"%>
