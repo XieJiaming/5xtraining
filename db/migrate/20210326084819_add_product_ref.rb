@@ -1,5 +1,5 @@
 class AddProductRef < ActiveRecord::Migration[6.1]
   def change
-    add_reference :products, :user
+    add_reference :products, :users
   end
 end
