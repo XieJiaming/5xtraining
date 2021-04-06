@@ -4,7 +4,6 @@ document.addEventListener('turbolinks:load', () => {
   const inputs_blank_validate = [name_input, price_input]
 
   const form = document.querySelector('form')
-  console.log(form)
   const submitbtn = document.querySelector('.submit > input')
 
 

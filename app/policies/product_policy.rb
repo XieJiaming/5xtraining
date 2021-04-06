@@ -1,7 +1,7 @@
 class ProductPolicy < ApplicationPolicy
 
   def index?
-    @record[0].user_id == user.id || user_is_owner_of_record || user.admin?
+    @record[0].user_id == user.id || user.admin?
   end
 
   def new?

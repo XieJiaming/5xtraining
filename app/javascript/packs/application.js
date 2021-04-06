@@ -16,3 +16,4 @@ ActiveStorage.start()
 import 'styles'
 import 'validates'
 import '../navbar'
+import '../admin_sidebar'
