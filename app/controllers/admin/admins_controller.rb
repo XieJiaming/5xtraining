@@ -75,13 +75,13 @@ class Admin::AdminsController < ApplicationController
   end
 
   def product_create
-    @product = Product.new
-
+    @product = Product.new(product_params)
+    @product.user_id = params[:user_id]
     respond_to do |format|
       if @product.save
         format.html {
           flash[:alert] = 'Successfully Add New Product'
-          redirect_to user_admin_admins_path
+          redirect_to user_product_admin_admin_path(params[:user_id])
         }
       else
         format.html {
@@ -122,7 +122,8 @@ class Admin::AdminsController < ApplicationController
     else 
       flash[:notice] = 'Something wrong'
     end
-    redirect_to product_admin_admins_path
+    redirect_to after_delete_product
+    # redirect_to product_admin_admins_path
   end
 
   def user_products_show

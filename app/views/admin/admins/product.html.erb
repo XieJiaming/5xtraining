@@ -3,11 +3,6 @@
 <div class="d-flex flex-row">
   <%= render "shared/admins/sidebar" %>
   <div>
-    <div class="d-flex">
-      <div class=" my-4">
-        <!-- <%= link_to t('.actions.new'), product_new_admin_admins_path, class: "btn btn-primary mr-2" %> -->
-      </div>  
-    </div>
     <% if flash[:notice] or flash[:alert] %>
       <p class='alert alert-primary flash'>
         <%= flash[:notice] %>  <%= flash[:alert] %>
