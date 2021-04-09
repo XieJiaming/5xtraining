@@ -1,10 +1,8 @@
 class Admin::AdminsController < ApplicationController
-  def index 
-
-  end
 
   def user
-    @users = User.all
+    @users = User.includes(:products)
+    authorize @users, :admin_user?
   end 
 
   def user_new
@@ -35,7 +33,7 @@ class Admin::AdminsController < ApplicationController
     if @user.destroy
       flash[:notice] = 'Successfully Delete Account'
     else 
-      flash[:notice] = 'Something wrong'
+      flash[:notice] = @user.errors.full_messages
     end
     redirect_to user_admin_admins_path
   end
@@ -68,10 +66,12 @@ class Admin::AdminsController < ApplicationController
 
   def product 
     @products = Product.all
+    authorize @products, :admin_user?
   end
 
   def product_new 
     @product = Product.new
+    authorize @products, :admin_user?    
   end
 
   def product_create
