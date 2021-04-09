@@ -1,5 +1,5 @@
 <p> Create New User </p>
-<%= form_with model: @user, url: user_create_admin_admins_path do |form| %>
+<%= form_with model: @user, url: admin_users_path, method: 'post' do |form| %>
   <% if @user.errors.any? %>
     <div class="alert alert-danger">
       <% @user.errors.full_messages.each do |message| %>

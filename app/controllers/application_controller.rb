@@ -23,7 +23,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_delete_product
-    byebug
     previous_path = session[:previous_previous_url]
     # session[:previous_url] = nil
     previous_path || root_path

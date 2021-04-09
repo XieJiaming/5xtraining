@@ -2,7 +2,7 @@
 
 <p><%= flash[:schedule_notice] %></p>
 <div class="container">
-  <%= form_with model: @product, url: product_create_admin_admins_path(user_id: params[:user_id]), method: 'post' do |form|%>
+  <%= form_with model: @product, url: admin_products_path(user_id: params[:user_id]), method: 'post' do |form|%>
     <div class="input mb-3 row">
       <div class="label">
         <%= form.label :name, t('zh-TW.products.index.attributes.product.name'), class: "col-sm-2 col-form-label"%>

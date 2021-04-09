@@ -4,7 +4,6 @@ class User < ApplicationRecord
   has_many :products, :dependent => :destroy
   
   before_destroy :check_last_admin?
-  before_update :check_last_admin?
   before_create :encrypt_password
 
   def self.log_in(params)

@@ -1,12 +1,11 @@
 document.addEventListener('turbolinks:load', () => {
   const body = document.querySelector('body')
 
-  const items = ['index', 'user', 'product']
+  const items = ['users', 'products']
   items.forEach(item => {
-    let contains = document.querySelector(`body,.admins,.${item}`)
-    let lis = contains.querySelectorAll('.nav-pills > li')
+    const contains = document.querySelector(`body,.${item}, .index`)
+    const lis = contains.querySelectorAll('.nav-pills > li')
     lis.forEach( li => {
-      let content = li.querySelector('a').textContent
 
       if (body.classList.contains(li.querySelector('a').textContent.toLowerCase())) {
         li.classList.add('nav-item')
