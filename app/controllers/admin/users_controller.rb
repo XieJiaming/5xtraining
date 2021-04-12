@@ -65,7 +65,11 @@ class Admin::UsersController < ApplicationController
 
   def products_show
     @user = User.find(params[:id])
-    @products = Product.where(user_id: params[:id])
+    if params[:tag]
+      @products = Tag.find_by!(name: params[:tag]).products.where(user_id: params[:id])
+    else
+      @products = Product.where(user_id: params[:id]).includes(:tags)
+    end
   end
 
   

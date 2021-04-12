@@ -33,6 +33,14 @@
     </div>
     <div class="input mb-3 row">
       <div class="label">
+        <%= form.label :all_tags, 'All Tags', class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field">
+        <%= form.text_field :all_tags, class: "form-control" %>
+      </div>
+    </div>
+    <div class="input mb-3 row">
+      <div class="label">
         <%= form.label :scheduled_start, t('zh-TW.products.index.attributes.product.scheduled_start'), class: "col-sm-2 col-form-label"%>
       </div>
       <div class="field col-sm-12">

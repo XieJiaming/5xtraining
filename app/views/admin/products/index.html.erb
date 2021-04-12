@@ -15,6 +15,7 @@
           <th scope="col">Name</th>
           <th scope="col">Price</th>
           <th scope="col">Stock</th>
+          <th scope="col">Tags</th>
           <th scope="col">Create At</th>
           <th scope="col">Update At</th>
           <th scope="col">Scheduled Start</th>
@@ -31,6 +32,7 @@
             <td><%= product.name %></td>
             <td><%= product.price %></td>
             <td><%= product.stock %></td>
+            <td><%= product.tags.map(&:name).join(' ') %></td>
             <td><%= product.created_at.strftime("%m/%d/%Y") %></td>
             <td><%= product.updated_at.strftime("%m/%d/%Y") %></td>
             <td><%= product.scheduled_start.strftime("%m/%d/%Y") %></td>

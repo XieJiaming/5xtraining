@@ -13,6 +13,7 @@ class Admin::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @product.user_id = params[:user_id]
+    byebug
     respond_to do |format|
       if @product.save
         format.html {
@@ -58,12 +59,12 @@ class Admin::ProductsController < ApplicationController
     else 
       flash[:notice] = 'Something wrong'
     end
-    redirect_to after_delete_product
+    redirect_to user_product_admin_user_path(@product.user_id)
   end
 
   private
 
   def product_params
-    product_params = params.require(:product).permit(:name, :price, :stock, :scheduled_start, :scheduled_end, :product_resolve)
+    product_params = params.require(:product).permit(:name, :price, :stock, :scheduled_start, :scheduled_end, :product_resolve, :all_tags)
   end
 end
