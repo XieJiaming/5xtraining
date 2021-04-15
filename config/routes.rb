@@ -40,6 +40,9 @@ Rails.application.routes.draw do
     # end
   end
 
+  match '/404', to: 'errors#not_found', via: :all
+  match '/500', to: 'errors#internal_server_error', via: :all
+
   get 'sign_up', to: 'registrations#new'
   post 'sign_up', to: 'registrations#create'
 
