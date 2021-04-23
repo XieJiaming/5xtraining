@@ -13,6 +13,7 @@ module Fivextraining
     config.i18n.default_locale = "zh-TW"
     config.time_zone = "Taipei"
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.{rb,yml}')]
+    config.exceptions_app = self.routes
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

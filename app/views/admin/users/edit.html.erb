@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between">
+  <div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-bar-left" viewBox="0 0 16 16">
+      <path fill-rule="evenodd" d="M12.5 15a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5zM10 8a.5.5 0 0 1-.5.5H3.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L3.707 7.5H9.5a.5.5 0 0 1 .5.5z"/>
+    </svg>
+    <%= link_to 'Previous Page', admin_users_path %>    
+  </div>
+  <p>Edit User Page</p>
+  <div></div>
+</div>
+<% if flash[:notice] or flash[:alert] %>
+  <p class='alert alert-warning flash'>
+    <%= flash[:notice] %>  <%= flash[:alert] %>
+  </p> 
+<% end %>
+<%= form_with model: @user, url: admin_user_path(@user), method: 'put' do |form| %>
+  <% if @user.errors.any? %>
+    <div class="alert alert-danger">
+      <% @user.errors.full_messages.each do |message| %>
+        <div>
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="form-floating mb-3">
+    <%= form.text_field :name, class: 'form-control', placeholder: 'Name'%>
+    <%= form.label :name , 'Name'%>
+  </div>
+
+  <div class="form-floating mb-3">
+    <%= form.text_field :email, class: 'form-control', placeholder: 'name@example.com' %>
+    <%= form.label :email , 'Email address'%>
+  </div>
+  <div class="form-floating mb-3">
+    <%= form.password_field :password, class: 'form-control', placeholder: 'Password'%>
+    <%= form.label :password , 'Password'%>
+  </div>
+  <div class="form-floating mb-3">
+    <select name="user[admin]" id="user_admin" class="form-select form-select-sm mb-3" aria-label="false" >
+      <option selected="selected" value="false">false</option>
+      <option value="true">true</option>
+    </select>
+  </div>
+  <div class="form-floating">
+    <%= form.submit(class: "btn btn-primary my-5", value: 'Update User')%>
+  </div>
+<% end %>

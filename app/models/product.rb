@@ -2,6 +2,8 @@ class Product < ApplicationRecord
   validates :name, :price, :scheduled_start, :scheduled_end, presence: true
   
   belongs_to :user
+  has_many :taggings
+  has_many :tags, through: :taggings, dependent: :delete_all
 
   scope :owned_by, -> (user_id) {where user_id: user_id}
   scope :no_price, -> { where("price IS NULL") }
@@ -24,5 +26,15 @@ class Product < ApplicationRecord
     else
       return "full"
     end
+  end
+
+  def all_tags
+    tags.map{|tag| tag.name}.join(',')
+  end
+
+  def all_tags=(tags)
+    self.tags = tags.split(',').map do |name|
+                  Tag.where(name: name.strip).first_or_create
+                end
   end
 end

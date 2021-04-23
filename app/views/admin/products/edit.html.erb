@@ -1,0 +1,69 @@
+<p>Product Edit Page </p>
+
+<p><%= flash[:schedule_notice] %></p>
+<div class="container">
+  <%= form_with model: @product, url: admin_product_path(@product, user_id: @product.user_id), method: 'put' do |form|%>
+    <div class="input mb-3 row">
+      <div class="label">
+        <%= form.label :name, t('zh-TW.products.index.attributes.product.name'), class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field">
+        <%= form.text_field :name, class: "form-control"%>
+      </div>
+      <div class="">
+      </div>
+    </div>
+    <div class="input mb-3 row">
+      <div class="label">
+        <%= form.label :price, t('zh-TW.products.index.attributes.product.price'), class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field">
+        <%= form.text_field :price, class: "form-control" %>
+      </div>
+      <div class="">
+      </div>
+    </div>
+    <div class="input mb-3 row">
+      <div class="label">
+        <%= form.label :stock, t('zh-TW.products.index.attributes.product.stock'), class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field">
+        <%= form.text_field :stock, class: "form-control" %>
+      </div>
+    </div>
+    <div class="input mb-3 row">
+      <div class="label">
+        <%= form.label :scheduled_start, t('zh-TW.products.index.attributes.product.scheduled_start'), class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field col-sm-12">
+        <%= form.datetime_local_field :scheduled_start, :value => @product.scheduled_start.nil? ? "" : @product.scheduled_start.strftime("%Y-%m-%dT%H:%M:%S"), class: "form-control" %>
+
+        <i class="fa fa-calendar"></i>
+      </div>
+    </div>
+    <div class="input mb-3 row">
+      <div class="label">
+        <%= form.label :scheduled_end, t('zh-TW.products.index.attributes.product.scheduled_end'), class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field col-sm-12">
+        <input type="datetime-local" id="product_scheduled_end" name="product[scheduled_end]" class="datetimepicker_end form-control" value=<%= @product.scheduled_end.nil? ? '' : @product.scheduled_end.strftime("%Y-%m-%dT%H:%M:%S")%> >
+        <i class="fa fa-calendar"></i>
+      </div>
+    </div>
+    <div class="input mb-3 row">
+      <div class="label">
+        <%= form.label :product_resolve, t('zh-TW.products.index.attributes.product.product_resolve'), class: "col-sm-2 col-form-label"%>
+      </div>
+      <div class="field col-sm-10">
+        <select name="product[product_resolve]" id="product_product_resolve" class="form-select form-select-sm mb-3" >
+          <option selected="selected" value="不需叫貨">不需叫貨</option>
+          <option value="已叫貨">已叫貨</option>
+          <option value="需叫貨">需叫貨</option>
+        </select>
+      </div>
+    </div>
+    <div class="submit">
+      <%= form.submit(class: "btn btn-primary mr-2")%>
+    </div>
+  <% end %>
+</div>

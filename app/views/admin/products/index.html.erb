@@ -1,0 +1,48 @@
+<p>Product</p>
+
+<div class="d-flex flex-row">
+  <%= render "shared/admins/sidebar" %>
+  <div>
+    <% if flash[:notice] or flash[:alert] %>
+      <p class='alert alert-primary flash'>
+        <%= flash[:notice] %>  <%= flash[:alert] %>
+      </p> 
+    <% end %>
+    <table class="table table-striped table-hove">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Stock</th>
+          <th scope="col">Tags</th>
+          <th scope="col">Create At</th>
+          <th scope="col">Update At</th>
+          <th scope="col">Scheduled Start</th>
+          <th scope="col">Scheduled End</th>
+          <th scope="col">Resolve</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @products.each do |product| %>
+          <tr>
+            <th scope="row"><%= product.id %></th>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+            <td><%= product.stock %></td>
+            <td><%= product.tags.map(&:name).join(' ') %></td>
+            <td><%= product.created_at.strftime("%m/%d/%Y") %></td>
+            <td><%= product.updated_at.strftime("%m/%d/%Y") %></td>
+            <td><%= product.scheduled_start.strftime("%m/%d/%Y") %></td>
+            <td><%= product.scheduled_end.strftime("%m/%d/%Y") %></td>
+            <td><%= product.product_resolve %></td>
+            <td><%= link_to "Delete", admin_product_path(product), method:'Delete', data: {confirm: "Are you sure you want to delete this product?" } %></td>
+            <td><%= link_to "Edit", edit_admin_product_path(product) %></td>
+          </tr>    
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
