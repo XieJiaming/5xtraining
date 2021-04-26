@@ -24,54 +24,72 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    session[:userkey] = nil
-    respond_to do |format|
-      format.html {
-        flash[:log_out] = 'Successfully Log Out'
-        redirect_to root_path
-      }
+    if current_user
+      session[:userkey] = nil
+      respond_to do |format|
+        format.html {
+          flash[:log_out] = 'Successfully Log Out'
+          redirect_to root_path
+        }
+      end
+    else
+      redirect_to sign_in_path
     end
   end
 
   def show
-    @user = current_user
+    if current_user
+      @user = current_user
+    else
+      redirect_to sign_in_path
+    end
   end
 
   def update
-    @user = User.find(current_user[:id])
+    if current_user
+      @user = User.find(current_user[:id])
 
-    respond_to do |format|
-      if @user.update(session_update_params)
-        format.html {
-          redirect_to root_path
-        }
-      else
-        format.html {
-          render :show
-        }
+      respond_to do |format|
+        if @user.update(session_update_params)
+          format.html {
+            redirect_to root_path
+          }
+        else
+          format.html {
+            render :show
+          }
+        end
       end
+    else
+      redirect_to sign_in_path
     end
   end
 
   def delete_confirm
-    
+    if not current_user
+      redirect_to sign_in_path
+    end
   end
 
   def delete_account
-    @user = User.find(current_user[:id])
+    if current_user
+      @user = User.find(current_user[:id])
 
-    respond_to do |format|
-      if @user.destroy
-        flash[:notice] = 'Successfully Delete Account'
-        format.html {
-          redirect_to root_path
-        }
-      else 
-        flash[:notice] = 'Something wrong'
-        form.html {
-          render :delete_confirm
-        }
+      respond_to do |format|
+        if @user.destroy
+          flash[:notice] = 'Successfully Delete Account'
+          format.html {
+            redirect_to root_path
+          }
+        else 
+          flash[:notice] = 'Something wrong'
+          format.html {
+            render :delete_confirm
+          }
+        end
       end
+    else 
+      redirect_to sign_in_path
     end
   end
 
